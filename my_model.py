@@ -6,20 +6,24 @@ import cv2
 import sys, os
 from PIL import Image
 
+# Loading the model
+json_file = open("model-bw.json", "r")
+model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(model_json)
+# load weights into new model
+loaded_model.load_weights("model-bw.h5")
+print("Loaded model from disk")
+
+
+
 def facetones_model():
-    # Loading the model
-    json_file = open("model-bw.json", "r")
-    model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(model_json)
-    # load weights into new model
-    loaded_model.load_weights("model-bw.h5")
-    print("Loaded model from disk")
+
 
     # Category dictionary
     categories = {0: 'dark', 1: 'deep', 2: 'fair', 3: 'light', 4: 'light_medium', 5: 'medium_tan'}
 
-    test_image = cv2.imread('imgss.jpg')
+    test_image = cv2.imread('androidFlask.jpg')
     # img_array = cv2.imread('imgss.jpg')
     # plt.imshow(img_array)
     # plt.show()
@@ -36,11 +40,12 @@ def facetones_model():
                       'medium_tan': result[0][5]}
      # Sorting based on top prediction
     prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
-    print(prediction)
+    # print(prediction)
     ress = prediction[0]
-    print(ress[0])
+    # print(ress[0])
+    results=ress[0]
 
-    return ress
+    return results
 
 
 facetones_model()

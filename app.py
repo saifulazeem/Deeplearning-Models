@@ -1,5 +1,6 @@
 import tensorflow as tf
 import flask
+from flask import render_template
 import werkzeug
 import my_model as my_mod
 # from objectdet.TensorFlow.models.research.object_detection import obj
@@ -20,6 +21,7 @@ def handle_request():
 
     # hg=my_mod.model_indoor()
     res=my_mod.facetones_model()
+    # print('Result: ',res)
     # sd=obj.myvar
     # desr=obj_det()
     # dfg=sd+" "+hg+" "+desr
@@ -28,6 +30,9 @@ def handle_request():
 
 
     return res
+
+
+
 
 
 app.run(host="0.0.0.0", port=5000, debug=True)
